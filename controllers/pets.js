@@ -20,7 +20,33 @@ router.post('/', async (req,res)=> {
 })
 
 
+router.get('/', async (req,res)=>{
+    try{
+    const pets = await Pet.find({})
+    res.status(200).json({pets})
+    }
+    catch(err){
+    console.log(err)
+    res.status(500).json({err: 'failed to get pets'})
+    }
+})
 
+
+
+router.get('/:id', async (req,res)=>{
+    try{
+        const {id} = req.params
+    const onePet = await Pet.findById(id)
+    
+    if(!onePet){res.status(404).json({error: 'No pet found'})}
+
+    else{res.status(200).json({onePet})}
+    }
+    catch(err){
+    console.log(err)
+    res.status(500).json({err: 'failed to get pet'})
+    }
+})
 
 
 module.exports = router
