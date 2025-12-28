@@ -11,8 +11,25 @@ mongoose.connection.on('connected', () => {
   console.log(`Connected to MongoDB `);
 });
 
+
+/* -----controller----- */
+
+const petCtrl = require('./controllers/pets')
+
+/* middlewae */
+
 app.use(express.json());
 app.use(morgan('dev'));
+
+
+app.use('/pets',petCtrl)
+
+
+
+
+
+
+
 
 // Routes go here
 
