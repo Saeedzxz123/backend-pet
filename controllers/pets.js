@@ -49,4 +49,18 @@ router.get('/:id', async (req,res)=>{
 })
 
 
+router.delete('/:id', async (req,res)=>{
+    try{  const {id} = req.params
+    await Pet.findByIdAndDelete(id)
+}
+catch(err){
+        console.log(err)
+  res.status(500).json({err: 'pet cant be deleted'})}
+})
+
+
+
+
+
+
 module.exports = router
